@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RedPlan Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --azul-oscuro: #06151f;
+      --verde-agua: #3cc9b0;
+      --blanco: #ffffff;
+      --gris-oscuro: #1a1a1a;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--gris-oscuro);
+      color: var(--blanco);
+    }
+
+    header {
+      background-color: var(--azul-oscuro);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    nav a {
+      color: var(--blanco);
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-weight: 600;
+    }
+
+    .hero {
+      background: url('portada-proyecto.jpg') center/cover no-repeat;
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--blanco);
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: var(--blanco);
+    }
+
+    .cta-button {
+      background-color: var(--verde-agua);
+      color: var(--azul-oscuro);
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .cta-button:hover {
+      background-color: #2aa08d;
+    }
+
+    footer {
+      background-color: var(--azul-oscuro);
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--blanco);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="RedPlan Studio Logo">
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="nosotras.html">Nosotras</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="portafolio.html">Portafolio</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Diseñamos la conectividad del futuro</h1>
+    <p>Planos técnicos, modelado 3D y soluciones profesionales para telecomunicaciones y arquitectura.</p>
+    <a href="contacto.html"><button class="cta-button">Solicita una cotización</button></a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 RedPlan Studio · Todos los derechos reservados</p>
+  </footer>
+</body>
+</html>
