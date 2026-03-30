@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RedPlan Studio</title>
+
+<style>
+:root{
+    --primary:#0b84c6;
+    --secondary:#14c7d6;
+    --accent:#0668b3;
+    --dark:#16304f;
+    --text:#243447;
+    --muted:#64748b;
+    --light:#f5fbff;
+    --white:#ffffff;
+    --border:#cfeaf7;
+    --shadow:0 16px 40px rgba(11,132,198,.10);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(180deg,#f9fdff 0%,#eef8fd 55%,#f8fcff 100%);
+    color:var(--text);
+}
+
+img{max-width:100%;display:block;}
+
+.container{
+    width:min(1180px,92%);
+    margin:0 auto;
+}
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(255,255,255,0.96);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(11,132,198,.12);
+    box-shadow:0 8px 20px rgba(6,104,179,.05);
+}
+
+.nav-wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 0;
+    gap:20px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    font-weight:700;
+    color:var(--dark);
+}
+
+.brand img{
+    width:58px;
+    height:58px;
+    object-fit:contain;
+    border-radius:14px;
+    background:white;
+    box-shadow:0 10px 25px rgba(11,132,198,.12);
+    padding:4px;
+}
+
+.brand span{
+    font-size:22px;
+    color:var(--dark);
+}
+
+nav .links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:18px;
+}
+
+nav a{
+    color:var(--dark);
+    text-decoration:none;
+    font-weight:600;
+    transition:.25s;
+}
+
+nav a:hover{
+    color:var(--primary);
+}
+
+.hero{
+    padding:70px 0 60px;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:40px;
+    align-items:center;
+}
+
+.hero-text h1{
+    font-size:62px;
+    line-height:1.02;
+    margin:0 0 20px;
+    color:var(--dark);
+}
+
+.hero-text h1 span{
+    color:var(--primary);
+}
+
+.hero-text p{
+    font-size:18px;
+    line-height:1.8;
+    color:#3e546d;
+    max-width:620px;
+}
+
+.hero-card{
+    background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(234,248,255,.85));
+    border:1px solid rgba(20,199,214,.18);
+    border-radius:28px;
+    padding:24px;
+    box-shadow:0 22px 60px rgba(11,132,198,.12);
+}
+
+.hero-card img{
+    width:100%;
+    object-fit:contain;
+}
+
+.btns{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-top:28px;
+}
+
+.btn{
+    padding:14px 26px;
+    border-radius:999px;
+    text-decoration:none;
+    font-weight:700;
+    display:inline-block;
+    transition:.25s;
+    border:2px solid transparent;
+    cursor:pointer;
+}
+
+.btn-primary{
+    background:linear-gradient(90deg,var(--accent),var(--secondary));
+    color:white;
+    box-shadow:0 12px 24px rgba(11,132,198,.18);
+}
+
+.btn-primary:hover{transform:translateY(-2px);}
+
+.btn-outline{
+    border-color:var(--primary);
+    color:var(--primary);
+    background:white;
+}
+
+.btn-outline:hover{
+    background:#effaff;
+}
+
+section{
+    padding:80px 0;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:18px;
+    color:var(--dark);
+    font-size:38px;
+}
+
+.section-subtitle{
+    max-width:760px;
+    margin:0 auto 45px;
+    text-align:center;
+    color:var(--muted);
+    line-height:1.8;
+    font-size:17px;
+}
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+    align-items:center;
+}
+
+.about-card, .image-card, .package-card, .service-card, .contact-card, .form-card, .portfolio-card{
+    background:rgba(255,255,255,0.92);
+    border:1px solid rgba(11,132,198,.12);
+    border-radius:24px;
+    box-shadow:var(--shadow);
+}
+
+.about-card{
+    padding:30px;
+}
+
+.about-card p{
+    line-height:1.9;
+    color:#4b6277;
+}
+
+.image-card{
+    overflow:hidden;
+}
+
+.image-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    min-height:360px;
+}
+
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:22px;
+}
+
+.service-card{
+    overflow:hidden;
+}
+
+.service-card img{
+    width:100%;
+    height:190px;
+    object-fit:cover;
+}
+
+.service-card .content{
+    padding:22px;
+}
+
+.service-card h3{
+    margin:0 0 10px;
+    color:var(--dark);
+}
+
+.service-card p{
+    margin:0;
+    color:#64748b;
+    line-height:1.7;
+}
+
+/* GALERÍA CON FILTROS */
+.galeria-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+    margin-top:20px;
+}
+
+.galeria-item{
+    display:block;
+    border-radius:15px;
+    overflow:hidden;
+    background:#fff;
+    box-shadow:0 10px 20px rgba(0,0,0,0.05);
+}
+
+.galeria-item img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    display:block;
+}
+
+.packages-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:22px;
+}
+
+.package-card{
+    padding:28px;
+    position:relative;
+}
+
+.package-card .tag{
+    display:inline-block;
+    background:linear-gradient(90deg,#e6f6ff,#edfefe);
+    color:var(--accent);
+    padding:7px 13px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:16px;
+}
+
+.package-card h3{
+    margin:0 0 10px;
+    color:var(--dark);
+    font-size:24px;
+}
+
+.package-card ul{
+    margin:18px 0 0;
+    padding-left:18px;
+    color:#334155;
+    line-height:1.9;
+}
+
+/* PORTAFOLIO */
+.portfolio-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+}
+
+.portfolio-card{
+    overflow:hidden;
+    transition:0.3s;
+}
+
+.portfolio-card:hover{
+    transform:translateY(-5px);
+}
+
+.portfolio-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.portfolio-info{
+    padding:22px;
+}
+
+.portfolio-info h3{
+    margin:0 0 10px;
+    color:var(--dark);
+    font-size:22px;
+}
+
+.portfolio-info p{
+    margin:0;
+    color:#64748b;
+    line-height:1.7;
+}
+
+.contact-grid{
+    display:grid;
+    grid-template-columns:.9fr 1.1fr;
+    gap:24px;
+}
+
+.contact-card, .form-card{
+    padding:30px;
+}
+
+.contact-card p{
+    color:#475569;
+    line-height:1.9;
+    margin:12px 0;
+}
+
+form{
+    display:grid;
+    gap:14px;
+}
+
+input, textarea{
+    width:100%;
+    padding:15px 16px;
+    border-radius:14px;
+    border:1px solid #c7dce9;
+    font-family:inherit;
+    font-size:15px;
+    outline:none;
+    background:#fbfeff;
+}
+
+input:focus, textarea:focus{
+    border-color:var(--secondary);
+    box-shadow:0 0 0 3px rgba(20,199,214,.14);
+}
+
+textarea{min-height:150px;resize:vertical;}
+
+footer{
+    background:#edf7fc;
+    border-top:1px solid rgba(11,132,198,.12);
+    padding:28px 0;
+    text-align:center;
+    color:#4b6277;
+}
+
+.whatsapp-float{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:#25d366;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    text-decoration:none;
+    box-shadow:0 12px 30px rgba(37,211,102,.35);
+    z-index:1200;
+}
+
+.whatsapp-float:hover{
+    transform:scale(1.06);
+}
+
+@media (max-width: 900px){
+    .hero-grid,
+    .about-grid,
+    .contact-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero-text h1{
+        font-size:46px;
+    }
+
+    .nav-wrap{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    nav .links{
+        gap:12px;
+    }
+}
+
+@media (max-width: 560px){
+    .container{width:min(94%, 1180px);}
+    .hero-text h1{font-size:38px;}
+    .section-title{font-size:30px;}
+    section{padding:65px 0;}
+    .brand span{font-size:18px;}
+    .brand img{width:48px;height:48px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="container nav-wrap">
+        <div class="brand">
+            <img src="logo-redplan.png" alt="Logo RedPlan Studio">
+            <span>RedPlan Studio</span>
+        </div>
+        <div class="links">
+            <a href="#inicio">Inicio</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#galeria">Proyectos</a>
+            <a href="#paquetes">Paquetes</a>
+            <a href="#portafolio">Portafolio</a>
+            <a href="#contacto">Contacto</a>
+        </div>
+    </div>
+</nav>
+
+<header class="hero" id="inicio">
+    <div class="container hero-grid">
+        <div class="hero-text">
+            <h1>Diseñamos la <span>conectividad del futuro</span></h1>
+
+            <p style="font-size:20px; font-weight:600; color:#0b84c6;">
+                Ingeniería · Telecomunicaciones · Diseño · Tecnología
+            </p>
+
+            <p>
+                En RedPlan Studio integramos ingeniería, telecomunicaciones, diseño y transformación digital para desarrollar proyectos funcionales, profesionales y listos para ejecutar.
+            </p>
+
+            <div class="btns">
+                <a href="#paquetes" class="btn btn-primary">Ver paquetes</a>
+              <a href="https://wa.me/573008837626" target="_blank" class="btn btn-outline">WhatsApp 1</a>
+
+<a href="https://wa.me/573172726010" target="_blank" class="btn btn-outline">WhatsApp 2</a>
+            </div>
+        </div>
+
+        <div class="hero-card">
+            <img src="logo-redplan.png" alt="Logo principal RedPlan Studio">
+        </div>
+    </div>
+</header>
+
+<section id="nosotros">
+    <div class="container">
+        <h2 class="section-title">Sobre Nosotros</h2>
+        <p class="section-subtitle">
+            Somos una marca orientada al desarrollo técnico integral de proyectos, combinando precisión, diseño, documentación e innovación para entregar soluciones reales a empresas, aliados y clientes.
+        </p>
+
+        <div class="about-grid">
+            <div class="about-card">
+                <p>
+                    RedPlan Studio presta servicios profesionales y especializados en arquitectura, ingeniería, telecomunicaciones, documentación técnica, modelado BIM, digitalización, diseño de interiores y soluciones tecnológicas.
+                </p>
+                <p>
+                    Nuestro enfoque está dirigido a construir proyectos bien estructurados, con entregables de calidad, visión estratégica y acompañamiento técnico en cada etapa del proceso.
+                </p>
+            </div>
+
+            <div class="image-card">
+                <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80" alt="Equipo técnico en planeación de proyectos">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="servicios">
+    <div class="container">
+        <h2 class="section-title">Nuestros Servicios</h2>
+        <p class="section-subtitle">
+            Desarrollamos soluciones especializadas en documentación técnica, infraestructura tecnológica, diseño y soporte integral para empresas y proyectos de distinta escala.
+        </p>
+
+        <div class="services-grid">
+<div class="service-card">
+    <img src="capacitacion.jpg" alt="Estrategia, consultoría y formación especializada">
+    <div class="content">
+        <h3>Estrategia, consultoría y formación especializada</h3>
+        <p>Acompañamiento técnico y estratégico, asesoría especializada y procesos de capacitación orientados a la transferencia de conocimiento y fortalecimiento de capacidades.</p>
+    </div>
+</div>
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Telecomunicaciones y redes">
+                <div class="content">
+                    <h3>Infraestructura tecnológica y telecomunicaciones</h3>
+                    <p>Diseño de redes FTTH, diagramas técnicos, conectividad, despliegue de redes y documentación para operadores.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80" alt="Planos técnicos y arquitectura">
+                <div class="content">
+                    <h3>Planos técnicos e ingeniería</h3>
+                    <p>Elaboración de planos arquitectónicos, eléctricos, estructurales y técnicos en formatos profesionales.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80" alt="Diseño de interiores">
+                <div class="content">
+                    <h3>Diseño de interiores</h3>
+                    <p>Propuestas funcionales y estéticas para espacios residenciales, comerciales e institucionales.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="BIM y transformación digital">
+                <div class="content">
+                    <h3>Modelado BIM y soluciones digitales</h3>
+                    <p>Modelado BIM, digitalización de proyectos, automatización, visualización y soporte tecnológico empresarial.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="galeria">
+    <div class="container">
+        <h2 class="section-title">Proyectos</h2>
+
+        <div style="text-align:center; margin-bottom:25px;">
+          <button type="button" onclick="filtrar('all')" class="btn btn-primary">Todos</button>
+<button type="button" onclick="filtrar('ftth')" class="btn btn-outline">FTTH</button>
+<button type="button" onclick="filtrar('bim')" class="btn btn-outline">BIM</button>
+<button type="button" onclick="filtrar('interior')" class="btn btn-outline">Interiores</button>
+<button type="button" onclick="filtrar('doc')" class="btn btn-outline">Documentación</button>
+
+        </div>
+
+        <div class="galeria-grid">
+           <div class="galeria-grid">
+
+    <!-- FTTH (4 imágenes) -->
+    <div class="galeria-item ftth">
+        <img src="ftth1.jpg">
+    </div>
+    <div class="galeria-item ftth">
+        <img src="ftth2.jpg">
+    </div>
+    <div class="galeria-item ftth">
+        <img src="ftth3.jpg">
+    </div>
+    <div class="galeria-item ftth">
+        <img src="ftth4.jpg">
+    </div>
+
+    <!-- BIM (4 imágenes) -->
+    <div class="galeria-item bim">
+        <img src="bim1.jpg">
+    </div>
+    <div class="galeria-item bim">
+        <img src="bim2.jpg">
+    </div>
+    <div class="galeria-item bim">
+        <img src="bim3.jpg">
+    </div>
+    <div class="galeria-item bim">
+        <img src="bim4.jpg">
+    </div>
+
+    <!-- INTERIORES (4 imágenes) -->
+    <div class="galeria-item interior">
+        <img src="int1.jpg">
+    </div>
+    <div class="galeria-item interior">
+        <img src="int2.jpg">
+    </div>
+    <div class="galeria-item interior">
+        <img src="int3.jpg">
+    </div>
+    <div class="galeria-item interior">
+        <img src="int4.jpg">
+    </div>
+
+    <!-- DOCUMENTACIÓN (4 imágenes) -->
+    <div class="galeria-item doc">
+        <img src="doc1.jpg">
+    </div>
+    <div class="galeria-item doc">
+        <img src="doc2.jpg">
+    </div>
+    <div class="galeria-item doc">
+        <img src="doc3.jpg">
+    </div>
+    <div class="galeria-item doc">
+        <img src="doc4.jpg">
+    </div>
+
+ </div>
+</section>
+
+<section id="paquetes">
+    <div class="container">
+        <h2 class="section-title">Paquetes RedPlan Studio</h2>
+        <p class="section-subtitle">
+            Diseñamos paquetes flexibles para que cada cliente encuentre una solución alineada con su nivel de necesidad, alcance técnico y proyección de crecimiento.
+        </p>
+
+        <div class="packages-grid">
+<div class="package-card">
+    <span class="tag">Plan Estratégico</span>
+    <h3>Consultoría y formación especializada</h3>
+    <ul>
+        <li>Acompañamiento técnico y estratégico</li>
+        <li>Asesoría especializada para proyectos</li>
+        <li>Capacitación técnica personalizada</li>
+        <li>Transferencia de conocimiento</li>
+        <li>Fortalecimiento de capacidades en equipos de trabajo</li>
+        <li>Orientación para implementación y mejora de procesos</li>
+    </ul>
+</div>
+
+            <div class="package-card">
+                <span class="tag">Plan Esencial</span>
+                <h3>Desarrollo técnico integral de proyectos</h3>
+                <ul>
+                    <li>Elaboración de planos técnicos (FTTH, redes, eléctricos, etc.)</li>
+                    <li>Modelado básico (AutoCAD / base BIM)</li>
+                    <li>Memoria técnica del proyecto</li>
+                    <li>Entrega en formatos profesionales (DWG, PDF)</li>
+                </ul>
+            </div>
+
+            <div class="package-card">
+                <span class="tag">Plan Profesional</span>
+                <h3>Ingeniería completa</h3>
+                <ul>
+                    <li>Todo lo del Plan Esencial</li>
+                    <li>Modelado BIM detallado</li>
+                    <li>Documentación técnica completa</li>
+                    <li>Validación de normativas</li>
+                    <li>Ajustes y correcciones incluidos</li>
+                    <li>Acompañamiento técnico durante el desarrollo</li>
+                </ul>
+            </div>
+
+            <div class="package-card">
+                <span class="tag">Plan Empresarial</span>
+                <h3>Outsourcing Técnico</h3>
+                <ul>
+                    <li>Soporte técnico continuo</li>
+                    <li>Desarrollo de planos bajo demanda</li>
+                    <li>Entregables mensuales</li>
+                    <li>Prioridad en tiempos de entrega</li>
+                    <li>Comunicación directa tipo aliado estratégico</li>
+                    <li>Escalabilidad según volumen de trabajo</li>
+                </ul>
+            </div>
+
+            <div class="package-card">
+                <span class="tag">Plan Integral</span>
+                <h3>Diseño + Implementación</h3>
+                <ul>
+                    <li>Diseño técnico completo</li>
+                    <li>Planeación de infraestructura</li>
+                    <li>Digitalización de proyectos</li>
+                    <li>Acompañamiento en implementación</li>
+                    <li>Supervisión técnica</li>
+                    <li>Optimización de red / proyecto</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="portafolio">
+    <div class="container">
+        <div class="portfolio-grid">
+            <div class="portfolio-card">
+                <img src="ftth.jpg" alt="Red FTTH Urbana">
+                <div class="portfolio-info">
+                    <h3>Red FTTH Urbana</h3>
+                    <p>Diseño e implementación de red de fibra óptica con planeación técnica.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-card">
+                <img src="planos.jpg" alt="Planos Arquitectónicos">
+                <div class="portfolio-info">
+                    <h3>Planos Arquitectónicos</h3>
+                    <p>Desarrollo de planos técnicos en AutoCAD con entregables profesionales.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-card">
+                <img src="interior.jpg" alt="Diseño Interior Comercial">
+                <div class="portfolio-info">
+                    <h3>Diseño Interior Comercial</h3>
+                    <p>Optimización de espacios con enfoque moderno y funcional.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-card">
+                <img src="bim.jpg" alt="Modelado BIM">
+                <div class="portfolio-info">
+                    <h3>Modelado BIM</h3>
+                    <p>Modelado digital de infraestructura para control y visualización técnica.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="btns" style="justify-content:center; margin-top:30px;">
+            <a href="portafolio.pdf" target="_blank" class="btn btn-primary">Ver portafolio completo (PDF)</a>
+        </div>
+    </div>
+</section>
+
+<section id="contacto">
+    <div class="container">
+        <h2 class="section-title">Contacto</h2>
+        <p class="section-subtitle">
+            Cuéntanos lo que necesitas y te ayudamos a estructurar la mejor solución para tu proyecto.
+        </p>
+
+        <div class="contact-grid">
+            <div class="contact-card">
+                <h3>Información de contacto</h3>
+                <p><strong>WhatsApp:</strong> 300 883 7626</p>
+                <p><strong>Correo:</strong> redplanstudio@gmail.com</p>
+                <p><strong>Ubicación:</strong> Ibagué, Colombia</p>
+                <p><strong>Horario:</strong> Lunes a sábado</p>
+                <a href="https://wa.me/573008837626" target="_blank" class="btn btn-primary">Hablar por WhatsApp</a>
+ <a href="https://wa.me/573172726010" target="_blank" class="btn btn-primary">Hablar por WhatsApp</a>
+            </div>
+
+            <div class="form-card">
+                <h3>Solicita información</h3>
+
+                <form onsubmit="enviarWhatsApp(event)">
+                    <input type="text" id="nombre" placeholder="Nombre completo" required>
+                    <input type="email" id="correo" placeholder="Correo electrónico">
+                    <input type="text" id="telefono" placeholder="Teléfono o WhatsApp">
+                    <textarea id="mensaje" placeholder="Cuéntanos qué servicio necesitas" required></textarea>
+
+                    <button type="submit" class="btn btn-primary">
+                        Enviar por WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>© 2026 RedPlan Studio · Ingeniería, diseño, telecomunicaciones y soluciones digitales.</p>
+    </div>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/573008837626" target="_blank" aria-label="WhatsApp">
+<a class="whatsapp-float" href="https://wa.me/573172726010" target="_blank" aria-label="WhatsApp">
+    ✆
+</a>
+
+<script>
+function filtrar(tipo) {
+    const items = document.querySelectorAll('.galeria-item');
+
+    items.forEach(function(item) {
+        if (tipo === 'all' || item.classList.contains(tipo)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+function enviarWhatsApp(e){
+    e.preventDefault();
+
+    let nombre = document.getElementById("nombre").value;
+    let correo = document.getElementById("correo").value;
+    let telefono = document.getElementById("telefono").value;
+    let mensaje = document.getElementById("mensaje").value;
+
+    let texto = "Hola, quiero información:%0A%0A" +
+                "👤 Nombre: " + nombre + "%0A" +
+                "📧 Correo: " + correo + "%0A" +
+                "📞 Teléfono: " + telefono + "%0A" +
+                "📝 Mensaje: " + mensaje;
+
+    let url = "https://wa.me/573008837626?text=" + texto;
+let url = "https://wa.me/573172726010?text=" + texto;
+    window.open(url, "_blank");
+}
+</script>
+
+</body>
+</html>[index.html](https://github.com/user-attachments/files/26353180/index.html)
+ on ...
+- 🤔 I’m looking for help with ...
+- 💬 Ask me about ...
+- 📫 How to reach me: ...
+- 😄 Pronouns: ...
+- ⚡ Fun fact: ...
+-->
